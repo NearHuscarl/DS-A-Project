@@ -220,10 +220,14 @@ void StudentList::FindID(void)
          cout << "Name: " << stdList[i].mName << endl;
          cout << "Birthday: " << stdList[i].mBirthday << endl;
          cout << "Average Score: " << stdList[i].mAvgScore << endl;
+         cin.get();
+         cin.get();
          return;
       }
    }
    cout << "There are no students with ID " << id << endl;
+   cin.get();
+   cin.get();
 }
 
 void StudentList::FindName(void)
@@ -264,13 +268,22 @@ void StudentList::Sort(int type)
          SortID(left, right);
          break;
       case 2:
-         SortName(left, right);
-         break;
+         {
+            vector<string> nameList;
+            string name;
+            for(int i = 0; i < stdList.size(); i++)
+            {
+               name = GetName(stdList[i].mName);
+               nameList.push_back(name);
+            }
+            SortName(left, right, nameList);
+            break;
+         }
       case 3:
          SortScore(left, right);
          break;
    }
-   cout << "Sort done. Enter to continute";
+   cout << "Sort done. Enter to continue";
    cin.get();
    cin.get();
 }
@@ -299,29 +312,30 @@ void StudentList::SortID(int left, int right)
       SortID(i, right);
 }
 
-void StudentList::SortName(int left, int right)
+void StudentList::SortName(int left, int right, vector<string> &nameList)
 {
    int i, j;
    string x;
 
-   x = stdList[(left + right) / 2].mName;
+   x = nameList[(left + right) / 2];
    i = left;
    j = right;
 
-   while(stdList[i].mName < x) 
+   while(nameList[i] < x) 
       i++;
-   while(stdList[j].mName > x)
+   while(nameList[j] > x)
       j--;
    if(i <= j)
    {
       swap(stdList[i].mName, stdList[j].mName);
+      swap(nameList[i], nameList[j]);
       i++;
       j--;
    }
    if (left < j)
-      SortName(left, j);
+      SortName(left, j, nameList);
    if (right > i)
-      SortName(i, right);
+      SortName(i, right, nameList);
 }
 
 void StudentList::SortScore(int left, int right)
@@ -346,4 +360,30 @@ void StudentList::SortScore(int left, int right)
       SortScore(left, j);
    if (right > i)
       SortScore(i, right);
+}
+
+string StudentList::GetName(string str)
+{
+   string name;
+   int begin;
+
+   //remove trailling whitespace
+   while(isspace(str.back()))
+   {
+      str.pop_back();
+   }
+
+   for(int i = str.size()-1;; i--)
+   {
+      if(str[i] == ' ')
+      {
+         begin = i + 1;
+         break;
+      }
+      if(str[i] != ' ' && i == 0)
+      {
+         return str;
+      }
+   }
+   return str.substr(begin, str.size() - begin);
 }

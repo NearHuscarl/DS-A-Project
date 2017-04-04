@@ -8,13 +8,6 @@ using namespace std;
 
 int main()
 {
-   /* StudentList x, y; */ 
-   /* x.Write(); */
-
-   /* y.Read(); */
-   /* y.Find(0); */
-   /* y.Find(1); */
-   /* y.Print(); */
    StudentList students;
    int choice = -1, subChoice;
 
@@ -33,7 +26,7 @@ int main()
       switch(choice)
       {
          case 0:
-            break;
+            return 0;
          case 1:
             students.Read();
             break;
@@ -72,9 +65,6 @@ int main()
       }
       system("cls");
    }
-
-   system("pause");
-   return 0;
 }
 
 /* int main() */

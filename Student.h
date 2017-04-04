@@ -19,10 +19,11 @@ class StudentList
       vector<Student> stdList;
       int GetLine(ifstream &ifs);
       void SortID(int, int);
-      void SortName(int, int);
+      void SortName(int left, int right, vector<string>& nameList);
       void SortScore(int, int);
       void FindID();
       void FindName();
+      string GetName(string);
    public:
       void Read();
       void Write();
