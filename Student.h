@@ -26,10 +26,11 @@ class StudentList
    public:
       void Read();
       void Write();
-      void Print();
+      void Input();
+      void Output();
       void Update();
       void Find(bool);
-      void Sort(int, int, int);
+      void Sort(int);
 };
 
 #endif //STUDENT_H 

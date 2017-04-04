@@ -25,39 +25,25 @@ int StudentList::GetLine(ifstream &ifs)
 
 void StudentList::Write()
 {
-   int total;
-
-   cout << "Number of students: ";
-   cin >> total;
-
+   int total = stdList.size();
    ofstream ofs("DSSV.dat", ios::binary);
    short day, month, year;
-   Student student;
 
    ofs.write((char*)&total, sizeof(total));
    ofs << endl;
 
    if(ofs.is_open())
    {
-      for(int i = 0; i < total; i++)
+      for(int i = 0; i < stdList.size(); i++)
       {
-         cout << "ID: ";
-         cin >> student.mID;
-         cout << "Name: ";
-         cin.ignore();
-         getline(cin, student.mName);
-         cout << "Birthday: ";
-         student.mBirthday.Input();
-         cout << "Average Score: ";
-         cin >> student.mAvgScore;
 
-         day   = student.mBirthday.GetDay();
-         month = student.mBirthday.GetMonth();
-         year  = student.mBirthday.GetYear();
+         day   = stdList[i].mBirthday.GetDay();
+         month = stdList[i].mBirthday.GetMonth();
+         year  = stdList[i].mBirthday.GetYear();
 
-         ofs.write((char*)&student.mID, sizeof(int));
+         ofs.write((char*)&stdList[i].mID, sizeof(int));
          ofs << endl;
-         ofs.write(student.mName.c_str(), student.mName.size());
+         ofs.write(stdList[i].mName.c_str(), stdList[i].mName.size());
          ofs << endl;
          ofs.write((char*)&day, sizeof(day));
          ofs << endl;
@@ -65,11 +51,12 @@ void StudentList::Write()
          ofs << endl;
          ofs.write((char*)&year, sizeof(year));
          ofs << endl;
-         ofs.write((char*)&student.mAvgScore, sizeof(int));
+         ofs.write((char*)&stdList[i].mAvgScore, sizeof(int));
          ofs << endl;
-
-         stdList.push_back(student);
       }
+      cout << "File has been written successfully";
+      cin.get();
+      cin.get();
    }
    ofs.close();
 }
@@ -111,21 +98,76 @@ void StudentList::Read()
          stdList[i].mBirthday.SetMonth(month);
          stdList[i].mBirthday.SetYear(year);
       }
+      cout << "File has been read successfully";
+      cin.get();
+      cin.get();
    }
-
    ifs.close();
 }
 
-void StudentList::Print(void)
+void StudentList::Input(void)
 {
-   for(int i = 0; i < stdList.size(); i++)
+   int total;
+   char keypressed;
+   Student student;
+   cout << "Warning: All previous data in student list will be erased. Continue? (y/n): ";
+   cin >> keypressed;
+   if(keypressed == 'y')
    {
-      cout << "_____________________________________________" << endl;
-      cout << "ID: " << stdList[i].mID << endl;
-      cout << "Name: " << stdList[i].mName << endl;
-      cout << "Birthday: " << stdList[i].mBirthday << endl;
-      cout << "Average Score: " << stdList[i].mAvgScore << endl;
+      stdList.erase(stdList.begin(), stdList.end());
+
+      cout << "Number of students: ";
+      cin >> total;
+
+      for(int i = 0; i < total; i++)
+      {
+         cout << "_____________________________________________" << endl;
+         cout << "ID: ";
+         cin >> student.mID;
+         cout << "Name: ";
+         cin.ignore();
+         getline(cin, student.mName);
+         cout << "Birthday: ";
+         student.mBirthday.Input();
+         cout << "Average Score: ";
+         cin >> student.mAvgScore;
+
+         stdList.push_back(student);
+      }
+
+      cout << "Press Enter to continue";
+      cin.get();
+      cin.get();
    }
+   else
+   {
+      cout << "Canceled Operation. Press Enter to continue";
+      cin.get();
+      cin.get();
+   }
+
+}
+
+void StudentList::Output(void)
+{
+   if(stdList.size() < 1)
+   {
+      cout << "There is not data available" << endl;
+   }
+   else
+   {
+      for(int i = 0; i < stdList.size(); i++)
+      {
+         cout << "_____________________________________________" << endl;
+         cout << "ID: " << stdList[i].mID << endl;
+         cout << "Name: " << stdList[i].mName << endl;
+         cout << "Birthday: " << stdList[i].mBirthday << endl;
+         cout << "Average Score: " << stdList[i].mAvgScore << endl;
+      }
+   }
+   cout << "Press Enter to continue";
+   cin.get();
+   cin.get();
 }
 
 void StudentList::Update(void)
@@ -141,7 +183,10 @@ void StudentList::Update(void)
    cin >> student.mAvgScore;
 
    stdList.push_back(student);
-   Sort(0, stdList.size()-1, 1);
+   cout << "Updated successfully";
+   cin.get();
+   cin.get();
+   Sort(0);
 }
 
 void StudentList::Find(bool type)
@@ -155,6 +200,8 @@ void StudentList::Find(bool type)
          FindName();
          break;
    }
+   cout << "Press Enter to continue";
+   cin.get();
 }
 
 void StudentList::FindID(void)
@@ -167,7 +214,7 @@ void StudentList::FindID(void)
    {
       if(id == stdList[i].mID)
       {
-         cout << "Find result:" << endl;
+         cout << "---Find result---" << endl;
          cout << "_____________________________________________" << endl;
          cout << "ID: " << stdList[i].mID << endl;
          cout << "Name: " << stdList[i].mName << endl;
@@ -192,7 +239,7 @@ void StudentList::FindName(void)
       if(name.compare(stdList[i].mName) == 0)
       {
          flag = 1;
-         cout << "Find result:" << endl;
+         cout << "---File result---" << endl;
          cout << "_____________________________________________" << endl;
          cout << "ID: " << stdList[i].mID << endl;
          cout << "Name: " << stdList[i].mName << endl;
@@ -207,8 +254,10 @@ void StudentList::FindName(void)
    }
 }
 
-void StudentList::Sort(int left, int right, int type)
+void StudentList::Sort(int type)
 {
+   int left = 0;
+   int right = stdList.size()-1;
    switch(type)
    {
       case 1:
@@ -221,7 +270,9 @@ void StudentList::Sort(int left, int right, int type)
          SortScore(left, right);
          break;
    }
-   Write();
+   cout << "Sort done. Enter to continute";
+   cin.get();
+   cin.get();
 }
 
 void StudentList::SortID(int left, int right)
