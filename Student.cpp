@@ -8,6 +8,26 @@
 
 using namespace std;
 
+template <typename T>
+void Validate(string redoMsg, T reassignVar)
+{
+   while(true)
+   {
+      if(cin.fail())
+      {
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
+         cout << "Wrong input. Enter again" << endl;
+         cout << redoMsg;
+         cin >> reassignVar;
+      }
+      else
+      {
+         break;
+      }
+   }
+}
+
 int StudentList::GetLine(ifstream &ifs)
 {
    int count = 0;
@@ -51,7 +71,7 @@ void StudentList::Write()
          ofs << endl;
          ofs.write((char*)&year, sizeof(year));
          ofs << endl;
-         ofs.write((char*)&stdList[i].mAvgScore, sizeof(int));
+         ofs.write((char*)&stdList[i].mAvgScore, sizeof(double));
          ofs << endl;
       }
       cout << "File has been written successfully";
@@ -91,7 +111,7 @@ void StudentList::Read()
          ifs.ignore();
          ifs.read((char*)&year, sizeof(year));
          ifs.ignore();
-         ifs.read((char*)&stdList[i].mAvgScore, sizeof(int));
+         ifs.read((char*)&stdList[i].mAvgScore, sizeof(double));
          ifs.ignore();
 
          stdList[i].mBirthday.SetDay(day);
@@ -110,27 +130,47 @@ void StudentList::Input(void)
    int total;
    char keypressed;
    Student student;
+
    cout << "Warning: All previous data in student list will be erased. Continue? (y/n): ";
    cin >> keypressed;
+   Validate("Warning: All previous data in student list will be erased. Continue? (y/n): ", keypressed);
+
+   while(keypressed != 'y' && keypressed != 'n')
+   {
+      cout << "Input wrong. Enter again" << endl;
+      cout << "Warning: All previous data in student list will be erased. Continue? (y/n): ";
+      cin.ignore(INT_MAX, '\n');
+      cin >> keypressed;
+   }
+
    if(keypressed == 'y')
    {
       stdList.erase(stdList.begin(), stdList.end());
 
       cout << "Number of students: ";
       cin >> total;
+      Validate("Number of students: ", total);
 
       for(int i = 0; i < total; i++)
       {
          cout << "_____________________________________________" << endl;
+
          cout << "ID: ";
          cin >> student.mID;
+         Validate("ID: ", student.mID);
+
          cout << "Name: ";
          cin.ignore();
          getline(cin, student.mName);
+         ValidateStr("Name: ", student.mName);
+
          cout << "Birthday: ";
          student.mBirthday.Input();
+         student.mBirthday.IsValidDate();
+
          cout << "Average Score: ";
          cin >> student.mAvgScore;
+         Validate("Average Score: ", student.mAvgScore);
 
          stdList.push_back(student);
       }
@@ -139,13 +179,12 @@ void StudentList::Input(void)
       cin.get();
       cin.get();
    }
-   else
+   else if(keypressed == 'n')
    {
       cout << "Canceled Operation. Press Enter to continue";
       cin.get();
       cin.get();
    }
-
 }
 
 void StudentList::Output(void)
@@ -173,14 +212,23 @@ void StudentList::Output(void)
 void StudentList::Update(void)
 {
    Student student;
+
    cout << "ID: ";
    cin >> student.mID;
+   Validate("ID: ", student.mID);
+
    cout << "Name: ";
+   cin.ignore();
    getline(cin, student.mName);
+   ValidateStr("Name: ", student.mName);
+
    cout << "Birthday: ";
    student.mBirthday.Input();
+   student.mBirthday.IsValidDate();
+
    cout << "Average Score: ";
    cin >> student.mAvgScore;
+   Validate("Average Score: ", student.mAvgScore);
 
    stdList.push_back(student);
    cout << "Updated successfully";
@@ -207,8 +255,10 @@ void StudentList::Find(bool type)
 void StudentList::FindID(void)
 {
    int id;
+
    cout << "Find student with ID: ";
    cin >> id;
+   Validate("Find student with ID: ", id);
 
    for(int i = 0; i < stdList.size(); i++)
    {
@@ -387,3 +437,24 @@ string StudentList::GetName(string str)
    }
    return str.substr(begin, str.size() - begin);
 }
+
+void StudentList::ValidateStr(string redoMsg, string reassignVar)
+{
+   while(true)
+   {
+      if(cin.fail())
+      {
+         cin.clear();
+         cin.ignore(INT_MAX, '\n');
+         cout << "Wrong input. Enter again" << endl;
+         cout << redoMsg;
+         getline(cin, reassignVar);
+         cin.ignore();
+      }
+      else
+      {
+         break;
+      }
+   }
+}
+

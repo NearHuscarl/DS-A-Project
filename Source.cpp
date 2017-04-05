@@ -6,6 +6,8 @@
 
 using namespace std;
 
+class Student;
+
 int main()
 {
    StudentList students;
@@ -23,6 +25,21 @@ int main()
       cout << "Press 7 to sort student list" << endl;
       cout << "Choice: ";
       cin >> choice;
+      while(true)
+      {
+         if(cin.fail() || choice < 0 || choice > 7)
+         {
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            cout << "Wrong input. Enter again" << endl;
+            cout << "Choice: ";
+            cin >> choice;
+         }
+         else
+         {
+            break;
+         }
+      }
       switch(choice)
       {
          case 0:
@@ -56,11 +73,6 @@ int main()
             cout << "Choice: ";
             cin >> subChoice;
             students.Sort(subChoice);
-            break;
-         default:
-            cout << "Invalid Input";
-            cin.get();
-            cin.get();
             break;
       }
       system("cls");

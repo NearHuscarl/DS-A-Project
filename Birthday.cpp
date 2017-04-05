@@ -54,3 +54,81 @@ ostream& operator<<(ostream& x, Birthday& b)
 {
    return x << setfill('0') << setw(2) << b.day << "/" << setw(2) << b.month << "/" << setw(4) << b.year << setfill(' ');
 }
+
+
+bool Birthday::IsValidDay(void)
+{
+   if(cin.fail() || day > 31 || day < 1)
+   {
+      cin.clear();
+      cin.ignore();
+      return false;
+   }
+   else if(!cin.fail())
+   {
+      return true;
+   }
+}
+
+bool Birthday::IsValidMonth(void)
+{
+   if(cin.fail() || month > 12|| month < 1)
+   {
+      cin.clear();
+      cin.ignore();
+      return false;
+   }
+   else if(!cin.fail())
+   {
+      return true;
+   }
+}
+
+bool Birthday::IsValidYear(void)
+{
+   if(cin.fail())
+   {
+      cin.clear();
+      cin.ignore();
+      return false;
+   }
+   else if(!cin.fail())
+   {
+      return true;
+   }
+}
+
+bool Birthday::IsLeapYear(void)
+{
+   if(year % 4 == 0)
+   {
+      if(year % 100 == 0)
+      {
+         if(year % 400 == 0)
+         {
+            return true;
+         }
+      }
+      return true;
+   }
+   return false;
+}
+
+int Birthday::MaxDayInMonth(int x)
+{
+   int mMaxDay[12] {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+   if(IsLeapYear())
+   {
+      mMaxDay[1]++;
+   }
+   return mMaxDay[x-1];
+}
+
+bool Birthday::IsValidDate(void)
+{
+   if(IsValidDay() && IsValidMonth() && IsValidYear() && day <= MaxDayInMonth(month))
+   {
+      return true;
+   }
+   return false;
+}

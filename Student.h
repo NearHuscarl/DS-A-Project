@@ -1,7 +1,6 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-/* class Birthday; */
 #include "Birthday.h"
 #include <vector>
 
@@ -10,7 +9,7 @@ struct Student
    int mID;
    string mName;
    Birthday mBirthday;
-   int mAvgScore;
+   double mAvgScore;
 };
 
 class StudentList 
@@ -24,6 +23,10 @@ class StudentList
       void FindID();
       void FindName();
       string GetName(string);
+
+      /* template <typename T> */
+      /* friend void Validate(string, T); */
+      void ValidateStr(string, string);
    public:
       void Read();
       void Write();
