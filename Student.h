@@ -23,11 +23,10 @@ class StudentList
       void FindID();
       void FindName();
       string GetName(string);
-
-      /* template <typename T> */
-      /* friend void Validate(string, T); */
       void ValidateStr(string, string);
+      void ValidateID(Student &st);
    public:
+      void ReadTxt(int size);
       void Read();
       void Write();
       void Input();

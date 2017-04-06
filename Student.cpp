@@ -8,7 +8,7 @@
 
 using namespace std;
 
-template <typename T>
+   template <typename T>
 void Validate(string redoMsg, T reassignVar)
 {
    while(true)
@@ -26,6 +26,40 @@ void Validate(string redoMsg, T reassignVar)
          break;
       }
    }
+}
+
+void StudentList::ReadTxt(int size)
+{
+   ifstream ifs("input.txt");
+   int dummy;
+   short day = 0, month = 0, year = 0;
+
+   stdList.resize(size);
+
+   ifs >> dummy;
+   ifs.ignore();
+
+   for(int i = 0; i < size; i++)
+   {
+      ifs >> stdList[i].mID;
+      ifs.ignore();
+
+      getline(ifs, stdList[i].mName);
+
+      ifs >> day;
+      ifs.ignore();
+      ifs >> month;
+      ifs.ignore();
+      ifs >> year;
+      ifs.ignore();
+      ifs >> stdList[i].mAvgScore;
+      ifs.ignore();
+
+      stdList[i].mBirthday.SetDay(day);
+      stdList[i].mBirthday.SetMonth(month);
+      stdList[i].mBirthday.SetYear(year);
+   }
+   ifs.close();
 }
 
 int StudentList::GetLine(ifstream &ifs)
@@ -49,11 +83,11 @@ void StudentList::Write()
    ofstream ofs("DSSV.dat", ios::binary);
    short day, month, year;
 
-   ofs.write((char*)&total, sizeof(total));
-   ofs << endl;
-
    if(ofs.is_open())
    {
+      ofs.write((char*)&total, sizeof(total));
+      ofs << endl;
+
       for(int i = 0; i < stdList.size(); i++)
       {
 
@@ -84,20 +118,19 @@ void StudentList::Write()
 void StudentList::Read()
 {
    ifstream ifs("DSSV.dat", ios::binary);
-   char* name;
    string strName;
-   int sizeStr, size = (GetLine(ifs) - 1) / 6;
+   int size = (GetLine(ifs) - 1) / 6;
    short day = 0, month = 0, year = 0;
 
    stdList.resize(size);
 
-   //Skip first line
-   int dummy;
-   ifs.read((char*)&dummy, sizeof(dummy));
-   ifs.ignore();
-
    if(ifs.is_open())
    {
+      //Skip first line
+      int dummy;
+      ifs.read((char*)&dummy, sizeof(dummy));
+      ifs.ignore();
+
       for(int i = 0; i < stdList.size(); i++)
       {
          ifs.read((char*)&stdList[i].mID, sizeof(int));
@@ -158,6 +191,7 @@ void StudentList::Input(void)
          cout << "ID: ";
          cin >> student.mID;
          Validate("ID: ", student.mID);
+         ValidateID(student);
 
          cout << "Name: ";
          cin.ignore();
@@ -166,7 +200,6 @@ void StudentList::Input(void)
 
          cout << "Birthday: ";
          student.mBirthday.Input();
-         student.mBirthday.IsValidDate();
 
          cout << "Average Score: ";
          cin >> student.mAvgScore;
@@ -216,6 +249,7 @@ void StudentList::Update(void)
    cout << "ID: ";
    cin >> student.mID;
    Validate("ID: ", student.mID);
+   ValidateID(student);
 
    cout << "Name: ";
    cin.ignore();
@@ -224,17 +258,16 @@ void StudentList::Update(void)
 
    cout << "Birthday: ";
    student.mBirthday.Input();
-   student.mBirthday.IsValidDate();
 
    cout << "Average Score: ";
    cin >> student.mAvgScore;
    Validate("Average Score: ", student.mAvgScore);
 
    stdList.push_back(student);
+
    cout << "Updated successfully";
    cin.get();
    cin.get();
-   Sort(0);
 }
 
 void StudentList::Find(bool type)
@@ -390,7 +423,8 @@ void StudentList::SortName(int left, int right, vector<string> &nameList)
 
 void StudentList::SortScore(int left, int right)
 {
-   int i, j, x;
+   int i, j;
+   double x;
 
    x = stdList[(left + right) / 2].mAvgScore;
    i = left;
@@ -458,3 +492,16 @@ void StudentList::ValidateStr(string redoMsg, string reassignVar)
    }
 }
 
+void StudentList::ValidateID(Student &st)
+{
+   for(int i = 0; i < stdList.size(); i++)
+   {
+      while(st.mID == stdList[i].mID)
+      {
+         cout << "ID is not unique. Enter again" << endl;
+         cout << "ID: ";
+         cin >> st.mID;
+         i = 0;
+      }
+   }
+}

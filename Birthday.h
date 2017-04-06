@@ -17,6 +17,7 @@ class Birthday
       bool IsValidDay();
       bool IsValidMonth();
       bool IsValidYear();
+      bool IsValidDate();
    public:
       Birthday();
       void Input();
@@ -26,7 +27,6 @@ class Birthday
       void SetDay(short);
       void SetMonth(short);
       void SetYear(short);
-      bool IsValidDate();
       friend ostream& operator<<(ostream& x, Birthday& b);
 };
 

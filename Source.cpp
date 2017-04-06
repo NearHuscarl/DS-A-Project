@@ -23,11 +23,12 @@ int main()
       cout << "Press 5 to add a new student to the list" << endl;
       cout << "Press 6 to find information about (a) student(s)" << endl;
       cout << "Press 7 to sort student list" << endl;
+      cout << "Press 8 to read from input.txt" << endl;
       cout << "Choice: ";
       cin >> choice;
       while(true)
       {
-         if(cin.fail() || choice < 0 || choice > 7)
+         if(cin.fail() || choice < 0 || choice > 8)
          {
             cin.clear();
             cin.ignore(INT_MAX, '\n');
@@ -74,60 +75,13 @@ int main()
             cin >> subChoice;
             students.Sort(subChoice);
             break;
+         case 8:
+            int size;
+            cout << "Size: ";
+            cin >> size;
+            students.ReadTxt(size);
+            break;
       }
       system("cls");
    }
 }
-
-/* int main() */
-/* { */
-/*    ofstream os; */
-/*    string a, b, c, d; */
-/*    int e, f, g, h; */
-/*    char* buf; */
-/*    cin >> e >> f; */
-/*    cin.ignore(); */
-/*    getline(cin, a); */
-/*    getline(cin, b); */
-
-/*    os.open("input.txt", ios::binary); */
-/*    os.write((char*)&e, sizeof(e)); */
-/*    os << endl; */
-/*    os.write((char*)&f, sizeof(f)); */
-/*    os << endl; */
-/*    os.write(a.c_str(), a.size()); */
-/*    os << endl; */
-/*    os.write(b.c_str(), b.size()); */
-/*    os << endl; */
-
-/*    os.close(); */
-
-/*    ifstream is("input.txt", ios::binary); */
-
-/*    is.read((char*)&g, sizeof(g)); */
-/*    is.ignore(); */
-/*    is.read((char*)&h, sizeof(h)); */
-/*    is.ignore(); */
-
-/*    buf = new char[a.size()]; */
-/*    is.read(buf, a.size()); */
-/*    c = ""; */
-/*    c.append(buf, a.size()); */
-/*    is.ignore(); */
-
-/*    buf = new char[d.size()]; */
-/*    is.read(buf, b.size()); */
-/*    d = ""; */
-/*    d.append(buf, b.size()); */
-/*    is.ignore(); */
-
-
-/*    is.close(); */
-
-/*    cout << g << endl; */
-/*    cout << h << endl; */
-/*    cout << c << endl; */
-/*    cout << d << endl; */
-/*    system("pause"); */
-/*    return 0; */
-/* } */

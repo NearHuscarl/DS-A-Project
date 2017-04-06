@@ -14,10 +14,33 @@ void Birthday::Input()
    cout << endl;
    cout << "Day: ";
    cin >> day;
+   while(!IsValidDay())
+   {
+      cout << "Invalid Day. Enter again" << endl;
+      cout << "Day: ";
+      cin >> day;
+   }
    cout << "Month: ";
    cin >> month;
+   while(!IsValidMonth())
+   {
+      cout << "Invalid Month. Enter again" << endl;
+      cout << "Month: ";
+      cin >> month;
+   }
    cout << "Year: ";
    cin >> year;
+   while(!IsValidYear())
+   {
+      cout << "Invalid Year. Enter again" << endl;
+      cout << "Year: ";
+      cin >> year;
+   }
+   while(!IsValidDate())
+   {
+      cout << "Invalid Date. Enter again" << endl;
+      Input();
+   }
 }
 
 short Birthday::GetDay()
@@ -61,7 +84,7 @@ bool Birthday::IsValidDay(void)
    if(cin.fail() || day > 31 || day < 1)
    {
       cin.clear();
-      cin.ignore();
+      cin.ignore(INT_MAX, '\n');
       return false;
    }
    else if(!cin.fail())
@@ -75,7 +98,7 @@ bool Birthday::IsValidMonth(void)
    if(cin.fail() || month > 12|| month < 1)
    {
       cin.clear();
-      cin.ignore();
+      cin.ignore(INT_MAX, '\n');
       return false;
    }
    else if(!cin.fail())
@@ -86,10 +109,10 @@ bool Birthday::IsValidMonth(void)
 
 bool Birthday::IsValidYear(void)
 {
-   if(cin.fail())
+   if(cin.fail() || year < 0)
    {
       cin.clear();
-      cin.ignore();
+      cin.ignore(INT_MAX, '\n');
       return false;
    }
    else if(!cin.fail())
@@ -124,11 +147,14 @@ int Birthday::MaxDayInMonth(int x)
    return mMaxDay[x-1];
 }
 
-bool Birthday::IsValidDate(void)
+bool Birthday::IsValidDate()
 {
    if(IsValidDay() && IsValidMonth() && IsValidYear() && day <= MaxDayInMonth(month))
    {
-      return true;
+      return 1;
    }
-   return false;
+   else
+   {
+      return 0;
+   }
 }
