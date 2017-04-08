@@ -1,0 +1,601 @@
+100
+16520587
+Nguyen Van Khanh
+24
+04
+1998
+9
+16520591
+Vu Gia Khiem
+08
+08
+1998
+7
+16520598
+Mai Thang Dang Khoa
+10
+05
+1998
+9
+16520608
+Vu Anh Khoa
+21
+09
+1998
+9
+16520621
+Pham Chi Kien
+27
+09
+1998
+6
+16520654
+Hong Gia Lap
+08
+01
+1997
+9
+16520656
+Phan Gia Ba Le
+16
+08
+1998
+8
+16520658
+Huynh Ngoc Liem
+18
+08
+1998
+7
+16520664
+Le Khac Hau Linh
+25
+05
+1998
+6
+16520675
+Do Thanh Loc
+17
+02
+1998
+7
+16520689
+Nguyen Kim Long
+02
+04
+1998
+8
+16520695
+Phan Vinh Long
+26
+08
+1997
+7
+16520703
+Nguyen Thanh Luan
+01
+01
+1998
+8
+16520717
+Pham Thi Hoang Mai
+07
+11
+1998
+7
+16520740
+Nguyen Cong Minh
+12
+08
+1998
+8
+16520742
+Nguyen Ngoc Nhat Minh
+11
+11
+1998
+9
+16520752
+Tran Duy Minh
+09
+12
+1998
+9
+16520756
+Vo Thi Mot
+21
+11
+1998
+9
+16520769
+Nguyen Le Chan Nam
+24
+04
+1997
+9
+16520796
+Truong Tuan Ngan
+12
+12
+1997
+8
+16520805
+Khuong Le Minh Nghia
+16
+08
+1998
+7
+16520808
+Nguyen Hoang Trong Nghia
+03
+10
+1998
+8
+16520825
+Ho Thai Ngoc
+12
+01
+1998
+8
+16520846
+Nguyen Khanh Nguyen
+02
+01
+1998
+8
+16520867
+Huynh Huu Nhan
+15
+02
+1998
+8
+16520873
+Phan Hoang Nhan
+08
+12
+1998
+7
+16520899
+Nguyen Thi Tuyet Nhung
+06
+07
+1998
+7
+16520904
+Tran Minh Nhut
+05
+08
+1998
+8
+16520910
+Huynh Gia Phat
+05
+05
+1998
+8
+16520921
+Vo Van Phat
+22
+01
+1998
+7
+16520935
+Nguyen Phi Phu
+29
+07
+1998
+6
+16520954
+Nguyen Tan Phuc
+07
+05
+1998
+8
+16520965
+Hoang Duy Phuong
+03
+03
+1998
+9
+16520972
+Nguyen Thi Lan Phuong
+20
+04
+1998
+9
+16521009
+Bui Dang Quy
+21
+10
+1998
+6
+16521022
+Nguyen Huynh Sang
+06
+02
+1997
+8
+16521053
+Nguyen Quoc Tai
+03
+05
+1998
+9
+16520020
+Tang Hoang An
+19
+03
+1998
+9
+16520029
+Dao Duc Viet Anh
+18
+05
+1998
+7
+16520036
+Le Duc Anh
+14
+06
+1997
+6
+16520062
+Vu Ngoc Duy Anh
+22
+09
+1998
+9
+16520067
+Phan Trong Ba
+19
+08
+1998
+9
+16520068
+Nguyen Xuan Bac
+7
+7
+1998
+7
+16520069
+Tran Xuan Bac
+2
+2
+1998
+6
+16520085
+Nguyen Ngoc Duy Bao
+1
+7
+1998
+9
+16520105
+Chu Trong Cao
+2
+1
+1998
+5
+16520108
+Hoang Van Chau
+15
+08
+1996
+8
+16520131
+Nguyen Thanh Cong
+19
+12
+1998
+7
+16520147
+Nguyen Duy Cuong
+6
+4
+1998
+7
+16520167
+Bach Hai Dang
+2
+9
+1997
+4
+16520199
+Nguyen Tien Dat
+5
+1
+1998
+10
+16520237
+Le Trong Anh Duc
+5
+10
+1998
+6
+16520246
+Pham Thanh Duc
+19
+03
+1998
+5
+16520276
+Bui Duc Duy
+3
+3
+1998
+8
+16520285
+Huynh Phuong Duy
+20
+02
+1998
+8
+16520287
+Huynh Tien Duy
+7
+4
+1998
+9
+16520291
+Nguyen Duong Hoang Duy
+2
+6
+1998
+8
+16520300
+Nguyen Y Duy
+04
+11
+1998
+9
+16520303
+Phan Thanh Duy
+5
+12
+1998
+9
+16520359
+To Trong Duy
+4
+4
+1998
+8
+16520361
+Le Hung Hien
+1
+2
+1998
+9
+16520369
+Tran Ngoc Hien
+18
+07
+1996
+8
+16520400
+Nguyen Minh Hieu
+26
+08
+1998
+8
+16520415
+Tran Minh Hieu
+2
+11
+1998
+8
+16520416
+Tran Minh Hieu
+16
+02
+1998
+8
+16520423
+Ngo Duc Hoa
+5
+10
+1998
+7
+16520453
+Vu Minh Hoang
+28
+11
+1998
+6
+16520456
+Nguyen Van Hieu
+10
+1
+1998
+4
+16520477
+Nguyen Dang Hung
+1
+5
+1998
+6
+16520489
+Tran Ngoc Hung
+5
+10
+1998
+9
+16520538
+Vo Quoc Huy
+9
+7
+1998
+8
+16520543
+Ngo Thi Huyen
+25
+04
+1998
+9
+16520576
+Duong Quoc Khanh
+2
+9
+1995
+9
+16520577
+Giang Quoc Khanh
+2
+9
+1998
+9
+16520580
+Le Mai Van Khanh
+17
+08
+1998
+5
+16520653
+Thai Thi Phuong Lan
+03
+04
+1998
+8
+16520683
+Tran Van Loi
+6
+2
+1998
+8
+16520686
+Le Vu Thanh Long
+25
+9
+1998
+8
+16520713
+Nguyen Cao Luyen
+21
+10
+1998
+8
+16520726
+Bui Nhat Minh
+20
+11
+1998
+8
+16520733
+Hoang Duc Minh
+12
+2
+1997
+9
+16520746
+Nguyen Van Minh
+2
+4
+1998
+9
+16520848
+Nguyen Trung Nguyen
+6
+11
+1998
+9
+16520948
+Ngo Hoang Phuc
+21
+02
+1998
+4
+16520951
+Nguyen Hoang Phuc
+22
+11
+1998
+9
+16520959
+Le Van Phuoc
+4
+11
+1998
+8
+16520995
+Ngo Duc Quang
+5
+12
+1998
+9
+16520996
+Nguyen Duy Quang
+15
+9
+1998
+8
+16521001
+Pham Dang Quang
+4
+7
+1998
+9
+16521031
+Le Pham Hoang Son
+3
+3
+1996
+9
+16521065
+Nguyen Thi Tam
+12
+06
+1998
+8
+16521075
+Nguyen Duy Tan
+4
+6
+1998
+9
+16521092
+Vu Duy Thai
+18
+12
+1998
+9
+16521095
+Ho Thai Thang
+25
+04
+1998
+6
+16521098
+Le Hau Thang
+10
+8
+1998
+6
+16521103
+Nguyen Huu Thang
+22
+9
+1998
+9
+16521169
+Vi Chi Thien
+6
+6
+1998
+9
+16521178
+Nguyen Dinh Phu Thanh
+13
+03
+1998
+8
+16521226
+Nguyen Minh Tien
+8
+2
+1997
+8
+16521239
+Bui Trung Tin
+13
+09
+1998
+10
