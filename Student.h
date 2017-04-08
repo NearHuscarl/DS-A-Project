@@ -19,21 +19,24 @@ class StudentList
       int GetLine(ifstream &ifs);
       void SortID(int, int);
       void SortName(int left, int right, vector<string>& nameList);
-      void SortScore(int, int);
+      void SortScore();
       void FindID();
       void FindName();
       string GetName(string);
       void ValidateStr(string, string);
       void ValidateID(Student &st);
    public:
-      void ReadTxt(int size);
+      void ReadTxt();
       void Read();
       void Write();
       void Input();
-      void Output();
       void Update();
-      void Find(bool);
-      void Sort(int);
+      void DeleteOne();
+      void Delete();
+      void Print();
+      void Add();
+      void Find();
+      void Sort();
 };
 
 #endif //STUDENT_H 

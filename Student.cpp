@@ -28,8 +28,12 @@ void Validate(string redoMsg, T reassignVar)
    }
 }
 
-void StudentList::ReadTxt(int size)
+void StudentList::ReadTxt()
 {
+   int size;
+   cout << "Size: ";
+   cin >> size;
+
    ifstream ifs("input.txt");
    int dummy;
    short day = 0, month = 0, year = 0;
@@ -68,6 +72,11 @@ int StudentList::GetLine(ifstream &ifs)
    string line;
    while(getline(ifs, line))
    {
+      //skip empty line
+      if(line.empty())
+      {
+         continue;
+      }
       count++;
    }
    //set position to beginning of the file again
@@ -79,6 +88,13 @@ int StudentList::GetLine(ifstream &ifs)
 
 void StudentList::Write()
 {
+   if(stdList.empty())
+   {
+      cout << "Student list is empty. Please create new data first";
+      cin.get();
+      cin.get();
+      return;
+   }
    int total = stdList.size();
    ofstream ofs("DSSV.dat", ios::binary);
    short day, month, year;
@@ -164,16 +180,22 @@ void StudentList::Input(void)
    char keypressed;
    Student student;
 
-   cout << "Warning: All previous data in student list will be erased. Continue? (y/n): ";
-   cin >> keypressed;
-   Validate("Warning: All previous data in student list will be erased. Continue? (y/n): ", keypressed);
-
-   while(keypressed != 'y' && keypressed != 'n')
+   if(!stdList.empty())
    {
-      cout << "Input wrong. Enter again" << endl;
       cout << "Warning: All previous data in student list will be erased. Continue? (y/n): ";
-      cin.ignore(INT_MAX, '\n');
       cin >> keypressed;
+      Validate("Warning: All previous data in student list will be erased. Continue? (y/n): ", keypressed);
+
+      while(keypressed != 'y' && keypressed != 'n')
+      {
+         cout << "Input wrong. Enter key again: ";
+         cin.ignore(INT_MAX, '\n');
+         cin >> keypressed;
+      }
+   }
+   else
+   {
+      keypressed = 'y';
    }
 
    if(keypressed == 'y')
@@ -198,7 +220,7 @@ void StudentList::Input(void)
          getline(cin, student.mName);
          ValidateStr("Name: ", student.mName);
 
-         cout << "Birthday: ";
+         cout << "Birthday: " << endl;
          student.mBirthday.Input();
 
          cout << "Average Score: ";
@@ -220,12 +242,13 @@ void StudentList::Input(void)
    }
 }
 
-void StudentList::Output(void)
+void StudentList::Print(void)
 {
    if(stdList.size() < 1)
    {
-      cout << "There is not data available" << endl;
+      cout << "There is no data available" << endl;
    }
+
    else
    {
       for(int i = 0; i < stdList.size(); i++)
@@ -242,7 +265,7 @@ void StudentList::Output(void)
    cin.get();
 }
 
-void StudentList::Update(void)
+void StudentList::Add(void)
 {
    Student student;
 
@@ -256,7 +279,7 @@ void StudentList::Update(void)
    getline(cin, student.mName);
    ValidateStr("Name: ", student.mName);
 
-   cout << "Birthday: ";
+   cout << "Birthday: " << endl;
    student.mBirthday.Input();
 
    cout << "Average Score: ";
@@ -270,9 +293,188 @@ void StudentList::Update(void)
    cin.get();
 }
 
-void StudentList::Find(bool type)
+void StudentList::Update(void)
 {
-   switch(type)
+   if(stdList.empty())
+   {
+      cout << "Student list is empty. Please create new data first";
+      cin.get();
+      cin.get();
+      return;
+   }
+
+   int ID;
+
+   cout << "Enter ID of student to update: ";
+   cin >> ID;
+   Validate("Enter ID of student to update: ", ID);
+
+   for(int i = 0 ; i < stdList.size(); i++)
+   {
+      if(ID == stdList[i].mID)
+      {
+         cout << endl;
+         cout << "Student info: " << endl;
+         cout << "ID: " << stdList[i].mID << endl;
+         cout << "Name: " << stdList[i].mName << endl;
+         cout << "Birthday: " << stdList[i].mBirthday << endl;
+         cout << "Average Score: " << stdList[i].mAvgScore << endl << endl;
+
+         int choice;
+         cout << "Press 1 to update student's ID" << endl;
+         cout << "Press 2 to update student's name" << endl;
+         cout << "Press 3 to update student's birthday" << endl;
+         cout << "Press 4 to update student's average score" << endl;
+         cout << "Choice: ";
+         cin >> choice;
+
+         Validate("Choice: ", choice);
+
+         while(choice != 1 && choice != 2 && choice != 3 && choice != 4)
+         {
+            cout << "Wrong input. Enter again" << endl;
+            cout << "Choice: ";
+            cin >> choice;
+         }
+
+         switch(choice)
+         {
+            case 1:
+               cout << "New ID: ";
+               cin >> stdList[i].mID;
+               break;
+            case 2:
+               cout << "New name: ";
+               cin.ignore();
+               getline(cin, stdList[i].mName);
+               break;
+            case 3:
+               cout << "New birthday: " << endl;
+               stdList[i].mBirthday.Input();
+               break;
+            case 4:
+               cout << "New score: ";
+               cin >> stdList[i].mAvgScore;
+               break;
+         }
+         if(choice == 2)
+         {
+            cout << "Info has been updated. Press Enter to continue" << endl;
+            cin.get();
+         }
+         else
+         {
+            cout << "Info has been updated. Press Enter to continue" << endl;
+            cin.get();
+            cin.get();
+         }
+         return;
+      }
+   }
+   cout << "There are no students with ID " << ID << endl;
+   cin.get();
+   cin.get();
+   return;
+}
+
+void StudentList::DeleteOne(void)
+{   
+   if(stdList.empty())
+   {
+      cout << "There is no student in the list to delete";
+      cin.get();
+      cin.get();
+      return;
+   }
+
+   int ID;
+
+   cout << "Enter ID of student to update: ";
+   cin >> ID;
+   Validate("Enter ID of student to update: ", ID);
+
+   for(int i = 0 ; i < stdList.size(); i++)
+   {
+      if(ID == stdList[i].mID)
+      {
+         stdList.erase(stdList.begin() + i);
+         cout << "Student info has been deleted. Press Enter to continue" << endl;
+         cin.get();
+         cin.get();
+         return;
+      }
+   }
+   cout << "There are no students with ID " << ID << endl;
+   cin.get();
+   cin.get();
+   return;
+
+}
+
+void StudentList::Delete(void)
+{   
+   if(stdList.empty())
+   {
+      cout << "There is no student in the list to delete";
+      cin.get();
+      cin.get();
+      return;
+   }
+
+   char keypressed;
+   cout << "Warning: All info about students will be erased. Continue? (y/n): ";
+   cin >> keypressed;
+   Validate("Warning: All info about students will be erased. Continue? (y/n): ", keypressed);
+
+   while(keypressed != 'y' && keypressed != 'n')
+   {
+      cout << "Input wrong. Enter key again: ";
+      cin.ignore(INT_MAX, '\n');
+      cin >> keypressed;
+   }
+   if(keypressed == 'y')
+   {
+      stdList.erase(stdList.begin(), stdList.end());
+
+      cout << "Student list has been deleted. Press Enter to continue" << endl;
+      cin.get();
+      cin.get();
+      return;
+   }
+   else if(keypressed == 'n')
+   {
+      cout << "Canceled Operation. Press Enter to continue";
+      cin.get();
+      cin.get();
+   }
+}
+
+void StudentList::Find()
+{
+   if(stdList.empty())
+   {
+      cout << "Student list is empty. Please create new data first";
+      cin.get();
+      cin.get();
+      return;
+   }
+
+   int choice;
+   cout << "Press 0 to find student by ID" << endl;
+   cout << "Press 1 to find student by name" << endl;
+   cout << "Choice: ";
+   cin >> choice;
+
+   Validate("Choice: ", choice);
+
+   while(choice != 0 && choice != 1)
+   {
+      cout << "Wrong input. Enter again" << endl;
+      cout << "Choice: ";
+      cin >> choice;
+   }
+
+   switch(choice)
    {
       case 0:
          FindID();
@@ -281,8 +483,6 @@ void StudentList::Find(bool type)
          FindName();
          break;
    }
-   cout << "Press Enter to continue";
-   cin.get();
 }
 
 void StudentList::FindID(void)
@@ -302,7 +502,8 @@ void StudentList::FindID(void)
          cout << "ID: " << stdList[i].mID << endl;
          cout << "Name: " << stdList[i].mName << endl;
          cout << "Birthday: " << stdList[i].mBirthday << endl;
-         cout << "Average Score: " << stdList[i].mAvgScore << endl;
+         cout << "Average Score: " << stdList[i].mAvgScore << endl << endl;
+         cout << "Press Enter to continue";
          cin.get();
          cin.get();
          return;
@@ -338,14 +539,44 @@ void StudentList::FindName(void)
    if(flag == 0)
    {
       cout << "There are no students with the name " << name << endl;
+      cout << "Press Enter to continue";
    }
+   else
+   {
+      cout << "Press Enter to continue";
+   }
+   cin.get();      
 }
 
-void StudentList::Sort(int type)
+void StudentList::Sort()
 {
+   if(stdList.empty())
+   {
+      cout << "Student list is empty. Please create new data first";
+      cin.get();
+      cin.get();
+      return;
+   }
+
+   int choice;
+   cout << "Press 1 to sort student list by ID" << endl;
+   cout << "Press 2 to sort student list by name" << endl;
+   cout << "Press 3 to sort student list by average score" << endl;
+   cout << "Choice: ";
+   cin >> choice;
+
+   Validate("Choice: ", choice);
+
+   while(choice != 1 && choice != 2 && choice != 3)
+   {
+      cout << "Wrong input. Enter again" << endl;
+      cout << "Choice: ";
+      cin >> choice;
+   }
+
    int left = 0;
    int right = stdList.size()-1;
-   switch(type)
+   switch(choice)
    {
       case 1:
          SortID(left, right);
@@ -363,9 +594,10 @@ void StudentList::Sort(int type)
             break;
          }
       case 3:
-         SortScore(left, right);
+         SortScore();
          break;
    }
+
    cout << "Sort done. Enter to continue";
    cin.get();
    cin.get();
@@ -421,29 +653,14 @@ void StudentList::SortName(int left, int right, vector<string> &nameList)
       SortName(i, right, nameList);
 }
 
-void StudentList::SortScore(int left, int right)
+bool Compare(const Student &x, const Student &y)
 {
-   int i, j;
-   double x;
+   return x.mAvgScore < y.mAvgScore;
+}
 
-   x = stdList[(left + right) / 2].mAvgScore;
-   i = left;
-   j = right;
-
-   while(stdList[i].mAvgScore < x) 
-      i++;
-   while(stdList[j].mAvgScore > x)
-      j--;
-   if(i <= j)
-   {
-      swap(stdList[i].mAvgScore, stdList[j].mAvgScore);
-      i++;
-      j--;
-   }
-   if (left < j)
-      SortScore(left, j);
-   if (right > i)
-      SortScore(i, right);
+void StudentList::SortScore()
+{
+   sort(stdList.begin(), stdList.end(), Compare);
 }
 
 string StudentList::GetName(string str)

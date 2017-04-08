@@ -11,7 +11,6 @@ Birthday::Birthday()
 
 void Birthday::Input()
 {
-   cout << endl;
    cout << "Day: ";
    cin >> day;
    while(!IsValidDay())
