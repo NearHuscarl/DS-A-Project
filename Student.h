@@ -1,42 +1,23 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
+#include <string>
 #include "Birthday.h"
-#include <vector>
 
-struct Student
-{
-   int mID;
-   string mName;
-   Birthday mBirthday;
-   double mAvgScore;
-};
-
-class StudentList 
+class Student
 {
    private:
-      vector<Student> stdList;
-      int GetLine(ifstream &ifs);
-      void SortID(int, int);
-      void SortName(int left, int right, vector<string>& nameList);
-      void SortScore();
-      void FindID();
-      void FindName();
-      string GetName(string);
-      void ValidateStr(string, string);
-      void ValidateID(Student &st);
+      int mID;
+      std::string mName;
+      Birthday mBirthday;
+      double mAvgScore;
    public:
-      void ReadTxt();
-      void Read();
-      void Write();
+      bool IsValidScore(double);
       void Input();
-      void Update();
-      void DeleteOne();
-      void Delete();
-      void Print();
-      void Add();
-      void Find();
-      void Sort();
+      void Output();
+      friend class StudentList;
+      friend class Menu;
+      friend bool Compare(const Student&, const Student&);
 };
 
 #endif //STUDENT_H 

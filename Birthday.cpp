@@ -42,32 +42,32 @@ void Birthday::Input()
    }
 }
 
-short Birthday::GetDay()
+int Birthday::GetDay()
 {
    return day;
 }
 
-short Birthday::GetMonth()
+int Birthday::GetMonth()
 {
    return month;
 }
 
-short Birthday::GetYear()
+int Birthday::GetYear()
 {
    return year;
 }
 
-void Birthday::SetDay(short x)
+void Birthday::SetDay(int x)
 {
    day = x;
 }
 
-void Birthday::SetMonth(short x)
+void Birthday::SetMonth(int x)
 {
    month = x;
 }
 
-void Birthday::SetYear(short x)
+void Birthday::SetYear(int x)
 {
    year = x;
 }
@@ -80,13 +80,11 @@ ostream& operator<<(ostream& x, Birthday& b)
 
 bool Birthday::IsValidDay(void)
 {
-   if(cin.fail() || day > 31 || day < 1)
+   if(day > 31 || day < 1)
    {
-      cin.clear();
-      cin.ignore(INT_MAX, '\n');
       return false;
    }
-   else if(!cin.fail())
+   else
    {
       return true;
    }
@@ -94,13 +92,11 @@ bool Birthday::IsValidDay(void)
 
 bool Birthday::IsValidMonth(void)
 {
-   if(cin.fail() || month > 12|| month < 1)
+   if(month > 12|| month < 1)
    {
-      cin.clear();
-      cin.ignore(INT_MAX, '\n');
       return false;
    }
-   else if(!cin.fail())
+   else
    {
       return true;
    }
@@ -108,13 +104,11 @@ bool Birthday::IsValidMonth(void)
 
 bool Birthday::IsValidYear(void)
 {
-   if(cin.fail() || year < 0)
+   if(year < 0)
    {
-      cin.clear();
-      cin.ignore(INT_MAX, '\n');
       return false;
    }
-   else if(!cin.fail())
+   else
    {
       return true;
    }
@@ -152,8 +146,5 @@ bool Birthday::IsValidDate()
    {
       return 1;
    }
-   else
-   {
-      return 0;
-   }
+   return 0;
 }

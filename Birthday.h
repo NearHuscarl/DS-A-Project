@@ -8,9 +8,9 @@ using namespace std;
 class Birthday 
 {
    private:
-      short day;
-      short month;
-      short year;
+      int day;
+      int month;
+      int year;
       bool IsLeapYear();
       int MaxDayInMonth(int);
 
@@ -21,13 +21,14 @@ class Birthday
    public:
       Birthday();
       void Input();
-      short GetDay();
-      short GetMonth();
-      short GetYear();
-      void SetDay(short);
-      void SetMonth(short);
-      void SetYear(short);
+      int GetDay();
+      int GetMonth();
+      int GetYear();
+      void SetDay(int);
+      void SetMonth(int);
+      void SetYear(int);
       friend ostream& operator<<(ostream& x, Birthday& b);
+      friend class Menu;
 };
 
 #endif //BIRTHDAY_H 
